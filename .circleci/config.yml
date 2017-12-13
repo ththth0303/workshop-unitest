@@ -53,7 +53,7 @@ jobs:
           key: yarn-{{ checksum "composer.json" }}
 
       - run: npm run production
-      - run: php artisan migrate --database=mysql_test
+      - run: php artisan migrate --database=homestead_test
       # run tests!
       - run:
           command: |
@@ -63,3 +63,4 @@ jobs:
           path: /phpunit
       - store_artifacts:
           path: /phpunit
+          
