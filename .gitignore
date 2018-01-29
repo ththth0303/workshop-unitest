@@ -1,0 +1,17 @@
+/coverag
+/node_modules
+/public/hot
+/public/storage
+/public/photos 
+/public/filesgit  
+/storage/*.key
+/vendor
+/coverage
+/.idea
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.env
+.docker
