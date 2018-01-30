@@ -5,9 +5,10 @@
         </div>
  
         <div class="panel panel-default">
-            <div class="panel-heading">Create new company</div>
+            <div class="panel-heading">{{ message }}</div>
             <div class="panel-body">
-                <form v-on:submit="saveForm()">
+                <vue-loading type="spiningDubbles" color="#2ab27b" :size="{ width: '50px', height: '50px' }" v-if="isLoading"></vue-loading>
+                <form v-on:submit="saveForm()" v-else>
                     <div class="row">
                         <div class="col-xs-12 form-group">
                             <label class="control-label">Company name</label>
@@ -43,6 +44,7 @@
     </div>
 </template>
 <script>
+    import vueLoading from 'vue-loading-template';
     export default {
         mounted() {
             let app = this;
@@ -51,10 +53,15 @@
             axios.get('/api/v1/companies/' + id)
                 .then(function (resp) {
                     app.company = resp.data;
+                    app.isLoading = false;
+                    app.message = 'Edit Copmpany';
                 })
                 .catch(function () {
                     alert("Could not load your company")
                 });
+        },
+        components: {
+            vueLoading
         },
         data: function () {
             return {
@@ -64,7 +71,9 @@
                     address: '',
                     website: '',
                     email: '',
-                }
+                },
+                isLoading: true,
+                message: 'Waiting'
             }
         },
         methods: {

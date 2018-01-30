@@ -7,7 +7,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">Companies list</div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
+                <vue-loading type="spiningDubbles" color="#2ab27b" :size="{ width: '50px', height: '50px' }" v-if="isLoading"></vue-loading>
+                <table class="table table-bordered table-striped" v-else>
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -42,17 +43,23 @@
 </template>
  
 <script>
+    import vueLoading from 'vue-loading-template';
     export default {
         data: function () {
             return {
-                companies: []
+                companies: [],
+                isLoading: true,
             }
+        },
+        components: {
+            vueLoading
         },
         mounted() {
             var app = this;
             axios.get('/api/v1/companies')
                 .then(function (resp) {
                     app.companies = resp.data;
+                    app.isLoading = false;
                 })
                 .catch(function (resp) {
                     console.log(resp);
