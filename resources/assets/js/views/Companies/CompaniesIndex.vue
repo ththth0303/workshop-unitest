@@ -15,7 +15,7 @@
                         <th>Address</th>
                         <th>Website</th>
                         <th>Email</th>
-                        <th width="100">&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,7 +25,7 @@
                         <td>{{ company.website }}</td>
                         <td>{{ company.email }}</td>
                         <td>
-                            <router-link :to="{name: 'editCompany', params: {id: company.id}}" class="btn btn-xs btn-default">
+                            <router-link :to="{name: 'editCompany', params: {id: company.id}}" class="btn btn-xs btn-warning">
                                 Edit
                             </router-link>
                             <a href="#"
