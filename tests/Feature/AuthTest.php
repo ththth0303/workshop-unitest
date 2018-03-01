@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Http\Controllers\BoxController;
 
 class AuthTest extends TestCase
 {
@@ -84,5 +85,13 @@ class AuthTest extends TestCase
         $this->post('/logout');
         $response = $this->post('/password/reset', ['email' => $user->email]);
         $response->assertStatus(302);
+    }
+
+    public function testHasItemInBox()
+    {
+        $box = new BoxController(['cat', 'toy', 'torch']);
+
+        $this->assertEquals('toy', $box->has('toy'));
+        $this->assertFalse($box->has('ball'));
     }
 }
