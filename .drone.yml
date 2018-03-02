@@ -7,7 +7,7 @@ build:
       - chmod -R 777 bootstrap/cache/
       - cp .env.testing.example .env && cp .env.testing.example .env.testing
       - composer install
-      - yarn
+      - npm install
       - npm run production
       - php artisan migrate --database=mysql_test
       - framgia-ci run

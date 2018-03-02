@@ -85,12 +85,10 @@ return [
             'database' => env('DB_TEST_DATABASE', 'homestead_test'),
             'username' => env('DB_TEST_USERNAME', 'homestead_test'),
             'password' => env('DB_TEST_PASSWORD', 'secret'),
-            'unix_socket' => env('DB_TEST_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'strict' => true,
-            'engine' => 'InnoDB',
+            'strict' => false,
         ],
 
     ],
