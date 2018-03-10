@@ -59,8 +59,8 @@ jobs:
           command: |
             mkdir -p /phpunit &&
             php -dzend_extension=xdebug.so vendor/bin/phpunit --coverage-clover=phpunit/coverage-clover.xml --coverage-html=phpunit/coverage
+            phpcs --standard=Framgia --report-checkstyle=.framgia-ci-reports/phpcs.xml app
       - store_test_results:
           path: /phpunit
       - store_artifacts:
           path: /phpunit
-          
