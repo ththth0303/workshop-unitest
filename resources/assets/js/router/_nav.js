@@ -9,6 +9,11 @@ export default {
       name: 'Companies',
       url: '/companies',
       icon: 'icon-speedometer'
+    },
+    {
+      name: 'Categories',
+      url: '/categories',
+      icon: 'icon-speedometer'
     }
   ]
 }

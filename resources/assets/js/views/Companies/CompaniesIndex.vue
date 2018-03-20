@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="form-group">
-            <router-link :to="{name: 'createCompany'}" class="btn btn-success">Create new company</router-link>
+            <router-link :to="{name: 'Create'}" class="btn btn-success">Create new company</router-link>
         </div>
  
         <div class="panel panel-default">
@@ -25,19 +25,18 @@
                         <td>{{ company.website }}</td>
                         <td>{{ company.email }}</td>
                         <td>
-                            <router-link :to="{name: 'editCompany', params: {id: company.id}}" class="btn btn-xs btn-warning">
+                            <router-link :to="{name: 'Edit', params: {id: company.id}}" class="btn btn-xs btn-warning">
                                 Edit
                             </router-link>
-                            <a href="#"
-                               class="btn btn-xs btn-danger"
-                               v-on:click="deleteEntry(company.id, index)">
-                                Delete
-                            </a>
+                            <b-button type="button" variant="danger" @click="dangerModal = true;selectCompary.id = company.id; selectCompary.index = index">Delete</b-button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <b-modal title="Modal title" class="modal-danger" v-model="dangerModal" @ok="dangerModal = false;deleteEntry(selectCompary.id, selectCompary.index)" ok-variant="danger">
+                Do you really want to delete it?
+            </b-modal>
         </div>
     </div>
 </template>
@@ -49,6 +48,8 @@
             return {
                 companies: [],
                 isLoading: true,
+                dangerModal: false,
+                selectCompary: {id: null, index: null}
             }
         },
         components: {
@@ -68,16 +69,14 @@
         },
         methods: {
             deleteEntry(id, index) {
-                if (confirm("Do you really want to delete it?")) {
-                    var app = this;
-                    axios.delete('/api/v1/companies/' + id)
-                        .then(function (resp) {
-                            app.companies.splice(index, 1);
-                        })
-                        .catch(function (resp) {
-                            alert("Could not delete company");
-                        });
-                }
+                var app = this;
+                axios.delete('/api/v1/companies/' + id)
+                    .then(function (resp) {
+                        app.companies.splice(index, 1);
+                    })
+                    .catch(function (resp) {
+                        alert("Could not delete company");
+                    });
             }
         }
     }
